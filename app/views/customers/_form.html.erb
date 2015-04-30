@@ -1,28 +1,63 @@
-<%= simple_nested_form_for @customer, html: { class: 'form-horizontal' } do |f| %>
+<%= simple_nested_form_for @customer, html: { class: 'form-horizontal' } do |cust_form| %>
   <div class="row">
     <div class="span7">
       <fieldset>
         <legend><%= controller.action_name.capitalize %> Customer</legend>
-        <%= f.input :first_name, input_html: {class: "avg"} %>
-        <%= f.input :last_name, input_html: {class: "avg"} %>
-        <%= f.input :phone, input_html: {class: "avg"} %>
-        <%= f.input :email, input_html: {class: "avg"} %>
+          <% if @customer.errors.any? %>
+            <div id="error_explanation">
+              <h5><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h5>
+              <ul>
+              <% @customer.errors.full_messages.each do |msg| %>
+                <li><b style="color:red"><%= msg %></b></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <b><%= cust_form.label :first_name %></b><br />
+            <%= cust_form.text_field :first_name %>
+          </div>
+          <div class="field">
+            <b><%= cust_form.label :last_name %></b><br />
+            <%= cust_form.text_field :last_name %>
+          </div>
+          <div class="field">
+            <b><%= cust_form.label :phone %></b><br />
+            <%= cust_form.text_field :phone %>
+          </div>
+          <div class="field">
+            <b><%= cust_form.label :email %></b><br />
+            <%= cust_form.text_field :email %>
+          </div>
+          <div class="field">
+            <%= cust_form.check_box :active %>
+            <%= cust_form.label :active %><br />
+          </div>
+
+          <%= cust_form.simple_fields_for :user do |user_form| %>
+            <div class="field">
+              <b><%= user_form.label :username %></b><br />
+              <%= user_form.text_field :username %>
+            </div>
+          <div class="field">
+            <b><%= user_form.label :password %></b><br />
+            <%= user_form.text_field :password %>
+          </div>
+          <div class="field">
+            <b><%= user_form.label :password_confirmation %></b><br />
+            <%= user_form.text_field :password_confirmation %>
+          </div>
+          <div class="field">
+            <%= user_form.check_box :active %>
+            <%= user_form.label :active %><br />
+          </div>
+          <br>
+          <div class="form-actions">
+            <%= f.submit nil, :class => 'button radius' %>
+            <%= link_to 'Cancel', customers_path, :class => 'button alert radius' %>
+          </div>
       </fieldset>
-    </div>
-
-  <div class="span5">
-      <legend>Users for this Customer</legend>
-        <div id="user">
-          <%= f.simple_fields_for :users do |user_form| %>
-            <%= f.input :username, input_html: {class: "avg"} %>
-            <%= f.input :password, input_html: {class: "avg"} %>
-            <%= f.input :password_confirmation, input_html: {class: "avg"} %>
-          <% end %> 
-        </div> 
+    <% end %>
   </div>
-
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'button radius' %>
-    <%= link_to 'Cancel', customers_path, :class => 'button alert radius' %>
-  </div>
-<% end %>
+</div>

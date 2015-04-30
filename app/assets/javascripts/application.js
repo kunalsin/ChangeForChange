@@ -13,8 +13,33 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require foundation
+// require foundation
+//= require materialize
 //= require_tree .
 
-$(function(){ $(document).foundation(); });
+$(document).ready(function(){
+      $('.slider').slider({full_width: true});
+    });
 
+$(document).ready(function(){
+	// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+	$('.modal-trigger').leanModal();
+});
+
+$(function(){
+    $(function(){
+      $(".dropdown-button").dropdown({ constrain_width: false });
+      $('select').material_select();
+    });
+  });
+
+  $('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrain_width: false, // Does not change width of dropdown to that of the activator
+      hover: true, // Activate on hover
+      gutter: 0, // Spacing from edge
+      belowOrigin: true // Displays dropdown below the button
+    }
+  );
+        

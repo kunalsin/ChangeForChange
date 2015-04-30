@@ -11,41 +11,15 @@ class Ability
       # they get to do it all
       can :manage, :all
       
-    elsif user.role? :baker
-      # can see a list of all users
-      can :index, Item
-      
-      # they can read their own profile
-      can :show, User do |u|  
-        u.id == user.id
-      end
-      # they can update their own profile
-      can :update, User do |u|  
-        u.id == user.id
-      end
-
-    elsif user.role? :shipper
-      # can see a list of all users
-      can :index, Order
-      
-      # they can read their own profile
-      can :show, User do |u|  
-        u.id == user.id
-      end
-      # they can update their own profile
-      can :update, User do |u|  
-        u.id == user.id
-      end
-
     elsif user.role? :customer
 
       # they can read their own profile
-      can :show, User do |u|  
-        u.id == user.id
+      can :show, Customer do |u|  
+        u.id == user.customer.id
       end
       # they can update/edit their own profile
-      can :update, User do |u|  
-        u.id == user.id
+      can :update, Customer do |u|  
+        u.id == user.customer.id
       end
 
       # they can read items in their orders
@@ -71,11 +45,5 @@ class Ability
       can :read, Item
       can :create, Customer
     end
-  end
-end
-
-
-
-
   end
 end

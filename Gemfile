@@ -29,6 +29,9 @@ gem 'validates_timeliness', '3.0.14'
 gem 'carrierwave', '0.10.0'
 gem 'time_date_helpers', '0.0.2'
 gem 'foundation-rails'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-materialize'
+end
 
 # Additional gems that are very useful in Rails development
 group :development do

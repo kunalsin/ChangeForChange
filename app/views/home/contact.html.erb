@@ -1,28 +1,33 @@
-<div class="row">
-	<div class="small-7 columns">
-		<h2>Contact Bread Express</h2>
-		<p class="supertiny">&nbsp;</p>
-		<table cellpadding="3">
-			<tr>
-				<td>Webmaster:&nbsp;&nbsp;&nbsp;</td>
-				<td>Professor Larry Heimann</td>
-			</tr>
-			<tr>
-				<td>Email:</td>
-				<td>
-				<%= mail_to("profh@cmu.edu", "Klingon Code Warrior*", :encode => "javascript") %> 
-				</td>
-			</tr>
-			<tr>
-				<td>Phone:</td>
-				<td>412-268-8211</td>
-			</tr>
-		</table>
+<h3><em>Contact Us</em></h3>
 
-		<p class="note"><br>*I am a professor of information systems at Carnegie Mellon University and this nickname was a little joke between myself and my students that I adopted as my signature for all my programming work.  
-			<br><br><em>... in truth I am only half-Klingon.</em></p>
-			
-			<p>&nbsp;</p>
-			<p>&nbsp;</p>
+<div class="contact">
+	<p>Bread Express is a start up founded by
+	two rising entrepenuers. For any inquiries about the company or our business, you can refer to the contact
+	information below:</p>
+
+	<div class="row">
+		<div class="col s6">
+			<img src="https://sadderbutwiser.files.wordpress.com/2012/09/harry-potter-and-the-french-bread.jpg"> <!-- random image -->
+		</div>
+		<div class="col s6">
+			<table class="hoverable">
+				<tr>
+					<td>Webmaster:&nbsp;</td>
+					<td>Kunal Sinha</td>
+				</tr>
+				<tr>
+					<td>Email:</td>
+					<td>
+					<%= mail_to("kunalsin@cmu.edu", "Tom Marvolo Riddle*", encode: "javascript") %> 
+					</td>
+				</tr>
+				<tr>
+					<td>Phone:</td>
+					<td>412-268-8211</td>
+				</tr>
+			</table>
+
+			<p class="note"><br>*I am..the one who must not be named..</p>
+		</div>
 	</div>
 </div>

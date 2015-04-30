@@ -6,11 +6,12 @@ BreadExpress::Application.routes.draw do
   resources :orders
   resources :items
   resources :sessions
+  resources :users
 
   
   # Authentication routes
-  get 'user/edit' => 'users#edit', as: :edit_current_user
-  get 'signup' => 'users#new', as: :signup
+  get 'user/edit' => 'customers#edit', as: :edit_current_user
+  get 'signup' => 'customers#new', as: :signup
   get 'logout' => 'sessions#destroy', as: :logout
   get 'login' => 'sessions#new', as: :login
 

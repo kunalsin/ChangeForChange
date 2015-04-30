@@ -10,7 +10,29 @@
  *
  *= require_self
  *= require font-awesome.min
- *= require foundation_and_overrides
+ * require foundation_and_overrides
  *= require simple_form
  *= require jquery-ui
+ *= require materialize
+ *= require_tree .
  */
+
+#fot{
+	margin-bottom: -20px;
+	text-align: center;
+}
+
+body {
+	background-color: #FFFFFF																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													
+}
+
+.boxed {
+	border: 4px solid brown;
+	margin-bottom: 60px;
+	padding: 10px;
+	background-color: #C5A88B
+}
+
+.contact {
+	margin-bottom: 150px;
+}
