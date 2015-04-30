@@ -3,7 +3,7 @@
 <% else %>
 <h2><%= state.capitalize %> Addresses</h2>
 <table class="table table-striped">
-  <thead>
+  <thead class="datagrid">
     <tr>
       <% unless current_user.role?(:customer) %>
         <th>Customer</th>

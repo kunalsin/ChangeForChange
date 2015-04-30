@@ -15,6 +15,7 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
+    user = @customer.build_user
 
   end
 
