@@ -28,13 +28,28 @@ class Ability
         order_items.include? this_order.id 
       end
 
+      # they can create orders in their orders
+      #can :create, Order do |this_order|  
+        #order_items = user.customer.orders.map{|p| p.id.map(&:id)}
+        #order_items.include? this_order.id 
+      #end
+
       #can see a list of all the items
       can :index, Item
 
-      can :create, Address    
+      can :create, Address do |my_address|
+        mine_address = user.customer.address.map{|p| p.id.map(&:id)}
+        mine_address.include? my_address.id 
+      end
      
       # they can update tasks in these projects
       can :update, Address do |this_address|  
+        my_address = user.customer.address.map{|p| p.id.map(&:id)}
+        my_address.include? this_address.id 
+      end
+
+      # they can update tasks in these projects
+      can :read, Address do |this_address|  
         my_address = user.customer.address.map{|p| p.id.map(&:id)}
         my_address.include? this_address.id 
       end

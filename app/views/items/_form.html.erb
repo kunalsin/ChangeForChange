@@ -1,0 +1,61 @@
+<%= simple_nested_form_for @item, html: { class: 'form-horizontal' } do |item_form| %>
+  <div class="row">
+    <div class="span7">
+      <fieldset>
+        <legend><%= controller.action_name.capitalize %> Item </legend>
+          <% if @item.errors.any? %>
+            <div id="error_explanation">
+              <h5><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h5>
+
+              <ul>
+              <% @item.errors.full_messages.each do |msg| %>
+                <li><b style="color:red"><%= msg %></b></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <b><%= item_form.label :name %></b><br />
+            <%= item_form.text_field :name %>
+          </div>
+          <div class="field">
+            <b><%= item_form.label :description %></b><br />
+            <%= item_form.text_field :description %>
+          </div>
+          <div class="field">
+            <b><%= item_form.label :picture %></b><br />
+            <%= item_form.file_field :picture %>
+          </div>
+          <div class="field">
+            <b><%= item_form.label :category %></b><br />
+            <%= item_form.select(:category, Item::CATEGORIES, prompt: "Select...") %>
+          </div>
+          <div class="field">
+            <%= item_form.label :units_per_item %>
+            <%= item_form.text_field :units_per_item %><br />
+          </div>
+           <div class="field">
+            <%= item_form.label :weight %>
+            <%= item_form.text_field :weight %><br />
+          </div>
+           <div class="field">
+            <%= item_form.check_box :active %>
+            <%= item_form.label :active %><br />
+          </div>
+
+          <%= item_form.simple_fields_for :item_price do |price_form| %>
+            <div class="field">
+              <%= price_form.label :price %>
+              <%= price_form.text_field :price %><br />
+            </div>
+          </br>
+          <div class="form-actions">
+            <%= item_form.submit nil, :class => 'button radius' %>
+            <%= link_to 'Cancel', home_path, :class => 'button alert radius' %>
+          </div>
+      </fieldset>
+    <% end %>
+  </div>
+</div>
+  <% end %>

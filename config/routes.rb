@@ -27,9 +27,6 @@ BreadExpress::Application.routes.draw do
   root :to => 'home#home'  
   
   # Named routes
-
-
-
   
   # Last route in routes.rb that essentially handles routing errors
   get '*a', to: 'errors#routing'

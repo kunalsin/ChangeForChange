@@ -6,6 +6,7 @@
           <% if @customer.errors.any? %>
             <div id="error_explanation">
               <h5><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h5>
+              
               <ul>
               <% @customer.errors.full_messages.each do |msg| %>
                 <li><b style="color:red"><%= msg %></b></li>
@@ -54,10 +55,11 @@
           </div>
           <br>
           <div class="form-actions">
-            <%= f.submit nil, :class => 'button radius' %>
+            <%= cust_form.submit nil, :class => 'button radius' %>
             <%= link_to 'Cancel', customers_path, :class => 'button alert radius' %>
           </div>
       </fieldset>
     <% end %>
   </div>
 </div>
+<% end %>

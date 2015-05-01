@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
 
 
-  before_action :check_login
-  before_action :set_order, only: [:show, :update, :destroy]
+  before_action :check_login, except: [:show, :index]
+  before_action :set_item, only: [:show, :update, :destroy]
   authorize_resource
   
   def index
@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @price_history = @Item.item_prices.chronological
+    @history = @item.item_prices.chronological
   end
 
   def new
@@ -48,7 +48,10 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:active, :item_id, :name, :description, :picture, :category, :weight, :units_per_item, :item_price_attributes: [:id, :price, :start_date, :end_date])
+    params.require(:item).permit(:active, :id, :name, :description, :picture, :category, :weight, :units_per_item, item_prices_attributes: [:id, :price, :start_date, :end_date])
   end
+
+end
+
 
 

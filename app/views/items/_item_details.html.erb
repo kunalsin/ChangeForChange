@@ -1,0 +1,36 @@
+<h3>
+  <b>Name</b>: <%= @item.name %>
+</h3><br>
+
+<p>
+  <b>Description</b>: <%= @item.description %>
+</p>
+
+<p>
+  <b>Order Comes In:</b> <%=@item.units_per_item %> <%=@item.category == 'bread' ? 'loaf' : @item.category %></p>
+</p>
+
+<% if current_user && current_user.role?(:admin) %>
+  <p>
+    <b>Active</b>: <%= @item.active ? "Yes" : "No" %>&nbsp;&nbsp;&nbsp;
+  </p>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="300">Start Date</th>
+        <th width="100">End Date</th>
+        <th width="100">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% price_history.each do |ph| %>
+        <tr>
+          <td><%= price.start_date.strftime('%B, %d, %Y') %></td>
+          <td><%= price.end_date.nil? ? 'Present' : price.end_date.strftime('%B, %d, %Y') %></td>
+          <td><%= number_to_currency price.price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -3,7 +3,7 @@
     <%= render partial: "item_details" %>
   </div>
   <div class="small-5 columns">
-    <%= render partial: "partials/previous_orders", locals: {previous_orders: @previous_orders}  unless @previous_orders.empty?%>
+    <%= render partial: "partials/previous_orders", locals: {previous_orders: @previous_orders}  unless @previous_orders.nil?%>
   </div>
 </div>
 
