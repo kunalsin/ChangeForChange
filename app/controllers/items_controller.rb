@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:active, :id, :name, :description, :picture, :category, :weight, :units_per_item, item_prices_attributes: [:id, :price, :start_date, :end_date])
+    params.require(:item).permit(:active, :id, :name, :description, :picture, :category, :weight, :photo, :units_per_item, item_prices_attributes: [:id, :price, :start_date, :end_date])
   end
 
 end

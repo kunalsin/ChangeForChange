@@ -1,4 +1,4 @@
-<%= simple_nested_form_for @item, html: { class: 'form-horizontal' } do |item_form| %>
+<%= simple_nested_form_for @item, :html => { :multipart => true } do |item_form| %>
   <div class="row">
     <div class="span7">
       <fieldset>
@@ -23,8 +23,8 @@
             <b><%= item_form.label :description %></b><br />
             <%= item_form.text_field :description %>
           </div>
-          <div class="field">
-            <b><%= item_form.label :picture %></b><br />
+           <div class="field">
+            <%= item_form.label :picture %><br />
             <%= item_form.file_field :picture %>
           </div>
           <div class="field">
