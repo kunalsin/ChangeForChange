@@ -3,5 +3,11 @@
 ***My Cucumber Tests do not work, not sure why?? It won't get passed the
 'logged-in as admin' phase and says that methods such as .id and .first_name
 are unidentified. All the interactions definitely work so I was not sure what the 
-reason is ***
+reason is *** However, Prof H exempted us from the test that checks that 'I should 
+see Apple Cherry Bread' because I only select 3 of the similar items in the category
+rather than all the items in that category since it looks cluttered and is just a bad
+design.
 
+**Some cool features are that I included modal pop ups for user profiles 
+and I was able to aggregate each order with just one address for the shippers 
+instead of having multiple entries for addresses that have orders going to them***
