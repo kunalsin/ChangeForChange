@@ -16,7 +16,7 @@
     <div class="col s6 m6">
       <div class="card brown lighten-2">
         <div class="card-content white-text">
-          <span class="card-title">Details</span>
+          <span class="card-title">Item Details</span>
           <p><b>Comes In:</b> <%= @item.units_per_item %> <%= @item.category == 'bread' ? 'loaf' : @item.category %></p>
           <p><b>Price:</b> <%= number_to_currency @item.current_price %></p>
           <p><b>Total weight:</b> <%= @item.weight.round(2) %> lbs.</p>
@@ -42,6 +42,7 @@
               </tr>
             </tbody>
           </table>
+          <%= render :partial => 'item_price' %>
         </div>
       <% end %>
     </div>
@@ -100,3 +101,8 @@
   </tbody>
 </table>
 <% end %>
+
+<% if !logged_in? %>
+  <p><%= link_to "View More Items", items_path%></p>
+<%end%>
+

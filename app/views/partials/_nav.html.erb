@@ -1,3 +1,5 @@
+<div class='brown lighten-2'>
+
 <div class="contain-to-grid">
     <section class="top-bar-section">
       <%= link_to image_tag('breadexpress_title.png'), home_path %>
@@ -17,13 +19,16 @@
           <li><a class="dropdown-button" data-activates="orders">Orders<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <ul id="orders" class="dropdown-content">
               <li><%= link_to "All Orders", orders_path %></li>
+              <li><%= link_to "My Cart", cart_path %></li>
             </ul>
 
           <!-- options for users -->
           <li><a class="dropdown-button" data-activates="users">Users<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <ul id="users" class="dropdown-content">
-              <li><%= link_to "All Users", customers_path %></li>
-              <li><%= link_to "Create Users", new_customer_path %></li>
+              <li><%= link_to "All Users", users_path %></li>
+              <li><%= link_to "All Customers", customers_path %></li>
+              <li><%= link_to "Create Employee", new_user_path %></li>
+              <li><%= link_to "Create Customer", new_customer_path %></li>
             </ul>
 
            <!-- options for address -->
@@ -39,6 +44,11 @@
               <li><%= link_to "All Items", items_path %></li>
               <li><%= link_to "Add an Item", new_item_path %></li>
             </ul>
+          <li><a class="dropdown-button" data-activates="logout"><%=current_user.username.upcase %><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+          <ul id="logout" class="dropdown-content">
+            <li><%= link_to "My Profile", customer_path(current_user.customer.id) %></li>
+            <li><%= link_to 'Logout', logout_path %></li>
+          </ul>
         <% end %>
 
       <% if logged_in? && (current_user.role?(:customer)) %>
@@ -61,6 +71,11 @@
         </ul>
 
         <li><%= link_to "My Cart", cart_path %></li>
+        <li><a class="dropdown-button" data-activates="logout"><%=current_user.customer.first_name.upcase %><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+        <ul id="logout" class="dropdown-content">
+          <li><%= link_to "My Profile", customer_path(current_user.customer.id) %></li>
+          <li><%= link_to 'Logout', logout_path %></li>
+        </ul>
       <% end %>
 
     <% if logged_in? && (current_user.role?(:baker)) %>
@@ -68,6 +83,11 @@
       <ul id="current" class="dropdown-content">
         <li><%= link_to "Todays Baking List", home_path %></li>
       </ul>
+      <li><a class="dropdown-button" data-activates="logout"><%=current_user.username.upcase %><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+        <ul id="logout" class="dropdown-content">
+          <li><%= link_to "My Profile", user_path(current_user.id) %></li>
+          <li><%= link_to 'Logout', logout_path %></li>
+        </ul>
     <% end %>
 
     <% if logged_in? && (current_user.role?(:shipper)) %>
@@ -75,14 +95,12 @@
       <ul id="current" class="dropdown-content">
         <li><%= link_to "Todays Shipping List", home_path %></li>
       </ul>
-    <% end %>
-
-     <% if logged_in? %>
-        <li><a class="dropdown-button" data-activates="logout"><%=current_user.username.upcase %><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+      <li><a class="dropdown-button" data-activates="logout"><%=current_user.username.upcase %><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
         <ul id="logout" class="dropdown-content">
-          <li><%= link_to "My Profile", customer_path(current_user.customer.id) %></li>
+          <li><%= link_to "My Profile", user_path(current_user.id) %></li>
           <li><%= link_to 'Logout', logout_path %></li>
         </ul>
-      <% end %>
+    <% end %>
     </ul>
   </div>
+</div>

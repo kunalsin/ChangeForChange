@@ -1,0 +1,10 @@
+<% unless @inactive_users.empty? || !logged_in? %>
+  <div class="panel clearfix">
+    <h3>Inactive Users</h3>
+    <ul>
+      <% @inactive_users.each do |user| %>
+        <li><%= link_to user.username, user_path(user) %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

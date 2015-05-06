@@ -20,6 +20,7 @@
 #fot{
 	margin-bottom: -20px;
 	text-align: center;
+	color: #8d6e63;
 }
 
 body {
@@ -35,4 +36,11 @@ body {
 
 .contact {
 	margin-bottom: 150px;
+}
+
+.site-footer, .page-wrap:after {
+  height: 0px; 
+}
+.site-footer {
+  background: orange;
 }

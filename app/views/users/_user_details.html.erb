@@ -1,0 +1,17 @@
+<h1><left> <%=@user.username.capitalize%>'s Profile </left></h5>
+<br>
+
+<ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="mdi-action-account-box"></i><b>Role</b></div>
+      <div class="collapsible-body"><p><%= @user.role %></p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="mdi-maps-place"></i><b>Active</b></div>
+      <div class="collapsible-body"><p><%= @user.active ? 'Yes' : 'No' %></p></div>
+    </li>
+  </ul>
+
+<p>
+  <em>A Bread Express customer since <%= @user.created_at.year %>.</em>
+</p>

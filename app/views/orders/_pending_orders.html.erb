@@ -1,5 +1,6 @@
 <% if @pending_orders.empty? %>
-  <h5><em>No pending orders at this time.</em></h5>
+	<br><br>
+  <h5><em>You have no pending orders at this time.</em></h5>
 <% else %>
   <%= render :partial => "order_list", locals: {status: 'Pending', orders: @pending_orders} %> 
   <br /> 

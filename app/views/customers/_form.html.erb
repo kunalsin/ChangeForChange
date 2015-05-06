@@ -34,7 +34,7 @@
 
             <% if current_user && current_user.role?(:admin) %>
               <div class="field">
-                <b><%= cust_form.check_box :active %></b>
+                <%= cust_form.check_box :active %>
                 <%= cust_form.label :active %><br />
               </div>
             <% else %>
@@ -57,11 +57,11 @@
               </div>
               <div class="field">
                 <b><%= user_form.label :password %></b><br />
-                <%= user_form.text_field :password %>
+                <%= user_form.password_field :password %>
               </div>
               <div class="field">
                 <b><%= user_form.label :password_confirmation %></b><br />
-                <%= user_form.text_field :password_confirmation %>
+                <%= user_form.password_field :password_confirmation %>
               </div>
             <% end %>
               <%= user_form.input :active, as: :hidden, input_html: {value: true} %>

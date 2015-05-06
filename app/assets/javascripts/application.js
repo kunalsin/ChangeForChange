@@ -26,12 +26,6 @@ $(document).ready(function(){
 	$('.modal-trigger').leanModal();
 });
 
-$(function(){
-    $(function(){
-      $(".dropdown-button").dropdown({ constrain_width: false });
-      $('select').material_select();
-    });
-  });
 
   $('.dropdown-button').dropdown({
       inDuration: 300,
@@ -42,4 +36,12 @@ $(function(){
       belowOrigin: true // Displays dropdown below the button
     }
   );
+
+    $('select').material_select();
+
+ $(document).ready(function(){
+    $('.collapsible').collapsible({
+      accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+  });
         

@@ -2,9 +2,9 @@ class ItemsController < ApplicationController
   include BreadExpressHelpers::Cart
 
 
-  #before_action :check_login, except: [:show, :index]
+  before_action :check_login, except: [:show, :index]
   before_action :set_item, only: [:show, :update, :destroy]
-  #authorize_resource
+  authorize_resource
   
   def index
     @active = Item.active.alphabetical.paginate(:page => params[:page]).per_page(10)
@@ -14,11 +14,12 @@ class ItemsController < ApplicationController
   def show
     @history = @item.item_prices.chronological
     @item_price = ItemPrice.new
-    @similar_items = Item.active.for_category(@item.category).order("RANDOM()").where.not(id: @item.id)[1..3]
+    @similar_items = Item.active.for_category(@item.category)[1..3]
   end
 
   def edit
-    #@item.item_prices.build
+    @item = Item.find(params[:id])
+    @item.item_prices.build  
   end
 
   def new

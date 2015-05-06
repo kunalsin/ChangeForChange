@@ -57,7 +57,7 @@ class Ability
       can :remove_from_cart, Item
 
       #can see a list of all the items
-      can :index, Item
+      can :read, Item
       #can view their cart
       can :cart, Item
       #can create new addresses
@@ -82,11 +82,17 @@ class Ability
 
     elsif user.role? :shipper
 
-      can :read, Item
+      # they can read their own profile
+      can :show, User do |c|  
+        c.id = user.id
+      end
 
     elsif user.role? :baker
 
-      can :read, Item
+      # they can read their own profile
+      can :show, User do |c|  
+        c.id = user.id
+      end
 
     else
       # guests can read items covered (plus home pages)

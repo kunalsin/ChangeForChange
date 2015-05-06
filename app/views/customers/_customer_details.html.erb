@@ -1,16 +1,24 @@
-<h3><%= @customer.proper_name %></h3>
+<h1><left> <%=@customer.first_name%>'s Profile </left></h5>
+<br>
 
-<p>
-  <b>Phone</b>: <%= number_to_phone @customer.phone %>
-</p>
-
-<p>
-  <b>Email</b>: <%= mail_to @customer.email, @customer.email, encode: "javascript" %>
-</p>
-
-<p>
-  <b>Active</b>: <%= @customer.active ? 'Yes' : 'No' %>
-</p>
+<ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="mdi-action-account-box"></i><b>Full Name</b></div>
+      <div class="collapsible-body"><p><%= @customer.proper_name %></p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="mdi-hardware-phone-iphone"></i><b>Phone Number</b></div>
+      <div class="collapsible-body"><p><%= number_to_phone @customer.phone %></p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="mdi-communication-email"></i><b>Email Address</b></div>
+      <div class="collapsible-body"><p><%= mail_to @customer.email, @customer.email, encode: "javascript" %></p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="mdi-maps-place"></i><b>Active User?</b></div>
+      <div class="collapsible-body"><p><%= @customer.active ? 'Yes' : 'No' %></p></div>
+    </li>
+  </ul>
 
 <p>
   <em>A Bread Express customer since <%= @customer.created_at.year %>.</em>

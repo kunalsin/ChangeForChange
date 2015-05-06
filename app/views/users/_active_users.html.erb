@@ -1,0 +1,23 @@
+<% if @active_users.empty? %>
+  <h4>No active users at this time.</h4>
+<% else %>
+  <h4>Active Users</h4>
+  <table class="hoverable">
+    <thead class="datagrid">
+      <tr>
+        <th width="225">Username &nbsp;&nbsp;&nbsp;<i class="small mdi-action-account-circle"></i></th>
+        <th width="125">Role &nbsp;&nbsp;<i class="small mdi-av-my-library-books"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @active_users.each do |user| %>
+        <tr>
+          <td><%= link_to user.username, user_path(user) %></td>
+          <td><%= user.role  %></t>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%= will_paginate @active_users, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>  
+<% end %>
+<p>&nbsp;</p>

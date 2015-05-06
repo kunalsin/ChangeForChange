@@ -38,20 +38,22 @@
             <%= item_form.label :weight %>
             <%= item_form.text_field :weight %><br />
           </div>
-           <div class="field">
-            <%= item_form.check_box :active %>
-            <%= item_form.label :active %><br />
-          </div>
 
           <%= item_form.simple_fields_for :item_prices do |price_form| %>
+            <% if controller.action_name == 'new' || controller.action_name == 'create' %>
             <div class="field">
               <%= price_form.label :price %>
               <%= price_form.text_field :price %><br />
             </div>
+            <%end%>
             <%= price_form.input :start_date, as: :hidden, input_html: {value: Date.today } %>
             <%= price_form.input :end_date, as: :hidden, input_html: {value: nil } %>
           <%end%>
           </br>
+           <div class="field">
+            <%= item_form.check_box :active %>
+            <%= item_form.label :active %><br />
+          </div>
           <div class="form-actions">
             <%= item_form.submit nil, :class => 'button radius' %>
             <%= link_to 'Cancel', items_path, :class => 'button alert radius' %>

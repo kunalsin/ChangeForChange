@@ -1,25 +1,31 @@
+<br>
+
 <div class="boxed"><center>
   <h2>Shipper Dashboard</h2>
 </center></div>
 
-<p>Below are the orders that need be shipped today </p>
+<% if @unshipped_orders.empty? %>
+  <h5>No items need to be shipped today! You are free to go home!</h5>
+<%else%>
+  <p>Below are the orders that need be shipped today </p>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th width="100">Shipping Address</th>
-      <th width="300">Order</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @unshipped_orders.each do |uo| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= render :partial => "partials/address_info", locals: {address: uo.address}  %></td>
-        <td><%= render :partial => "partials/order_item_list", locals: {order_items: uo.order_items} %>
-        </td>
+        <th width="100"><center>Shipping Address</center></th>
+        <th width="300"><center>Order</center></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @unshipped_orders.each do |uo| %>
+        <tr>
+          <td><%= render :partial => "partials/address_info", locals: {address: uo.address}  %></td>
+          <td><%= render :partial => "partials/order_item_list", locals: {order_items: uo.order_items} %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%end%>
 
 

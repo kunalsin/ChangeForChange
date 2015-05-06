@@ -1,2 +1,24 @@
-<h2>Welcome <%= current_user.username.upcase %></h2>
-<%= render :partial => 'general_home' %>
+<h2><center>Admin's Dashboard</center></h2>
+
+<div class = "col s12">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><center><b>Total Number Of Customers In the System</b></center></th>
+        <th><center><b>Total Number Of Users In the System</b></center></th>
+        <th><center><b>Total Number Of Items In the System</b></center></th>
+
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><center><%= @total_c %></center></td>
+          <td><center><%= @total_u %></center></td>
+          <td><center><%= @total_i %></center></td>
+
+        </tr>
+    </tbody>
+  </table>
+ </div>
+
+
