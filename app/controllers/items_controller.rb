@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item.item_prices.build
+    #@item.item_prices.build
   end
 
   def new
