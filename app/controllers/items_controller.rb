@@ -9,6 +9,7 @@ class ItemsController < ApplicationController
   def index
     @active = Item.active.alphabetical.paginate(:page => params[:page]).per_page(10)
     @inactive = Item.inactive.alphabetical.paginate(:page => params[:page]).per_page(10)
+    
   end
 
   def show
