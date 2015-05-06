@@ -27,6 +27,12 @@ BreadExpress::Application.routes.draw do
   root :to => 'home#home'  
   
   # Named routes
+  post 'items/:id/add_to_cart' => 'items#add_to_cart', as: :add_to_cart
+  post 'items/:id/remove_from_cart' => 'items#remove_from_cart', as: :remove_from_cart
+  get 'cart' => 'items#cart', as: :cart
+  post 'checkout' => 'orders#new', as: :checkout
+  patch 'mark-shipped/:id' => 'home#mark_shipped', as: :mark_shipped
+  patch 'mark-unshipped/:id' => 'home#mark_unshipped', as: :mark_unshipped
   
   # Last route in routes.rb that essentially handles routing errors
   get '*a', to: 'errors#routing'

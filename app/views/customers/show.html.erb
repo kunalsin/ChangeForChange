@@ -2,10 +2,15 @@
   <div class="small-7 columns">
     <%= render partial: "customer_details" %>
   </div>
-  <div class="small-5 columns">
-    <%= render partial: "partials/previous_orders", locals: {previous_orders: @previous_orders}  unless @previous_orders.empty?%>
-  </div>
 </div>
 
-<!-- Add buttons to list all, edit project or destroy object -->
-<%= render partial: "partials/object_options", locals: {model_name: "customer", object: @customer}  %>
+<% if current_user.role?(:admin) %>
+	<!-- Add buttons to list all, edit project or destroy object -->
+	<%= render partial: "partials/object_options", locals: {model_name: "customer", object: @customer}  %>
+<% else %>
+      <%= link_to(eval("edit_customer_path"), class: 'button radius') do %>
+        <!-- <i class="fa fa-pencil"></i> -->
+        &nbsp;Edit
+      <% end %>
+<% end %>
+

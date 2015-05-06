@@ -1,0 +1,63 @@
+<div class="boxed"><center>
+  <h2>Baker Dashboard</h2>
+</center></div>
+
+<% if @breads.empty? && @muffins.empty? && @pastries.empty? %>
+  <h5>No items need to be baked today! You are free to go home!</h5>
+<%else%>
+  <p>Below are the item(s) that need be Baked today </p>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><center><b>Breads</b></center></th>
+        <th><center><b>Quantity</b><center></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @breads.each do |bread_item, bread_quantity| %>
+        <tr>
+          <td><center><%= bread_item %></center></td>
+          <td><center><%= bread_quantity %></center></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><center><b>Muffins</b></center></th>
+        <th><center><b>Quantity</b></center></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @muffins.each do |muffin_item, muffin_quantity| %>
+        <tr>
+          <td><center><%= muffin_item %></center></td>
+          <td><center><%= muffin_quantity %></center></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><center><b>Pastries</b></center></th>
+        <th><center><b>Quantity</b></center></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pastries.each do |pastry_item, pastry_quantity| %>
+        <tr>
+          <td><center><%= pastry_item %></center></td>
+          <td><center><%= pastry_quantity %></center></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
+

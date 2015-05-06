@@ -1,9 +1,10 @@
 class ItemsController < ApplicationController
+  include BreadExpressHelpers::Cart
 
 
-  before_action :check_login, except: [:show, :index]
+  #before_action :check_login, except: [:show, :index]
   before_action :set_item, only: [:show, :update, :destroy]
-  authorize_resource
+  #authorize_resource
   
   def index
     @active = Item.active.alphabetical.paginate(:page => params[:page]).per_page(10)
@@ -12,6 +13,12 @@ class ItemsController < ApplicationController
 
   def show
     @history = @item.item_prices.chronological
+    @item_price = ItemPrice.new
+    @similar_items = Item.active.for_category(@item.category).order("RANDOM()").where.not(id: @item.id)[1..3]
+  end
+
+  def edit
+    @item.item_prices.build
   end
 
   def new
@@ -22,8 +29,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      @item.item_prices.set_end_date.save!
-      redirect_to @item, notice: "Thank you, #{@item.name} was added."
+      redirect_to @item, notice: "#{@item.name} was added to the system."
     else
       render action: 'new'
     end
@@ -39,7 +45,25 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to items_url, notice: "This item was removed from the system."
+    redirect_to items_url, notice: "#{@item.name} was removed from the system."
+  end
+
+  def cart
+    @order_items = get_list_of_items_in_cart
+  end
+
+  def add_to_cart
+    @item = Item.find(params[:id])
+    add_item_to_cart(@item.id)
+    flash[:notice] = "Added #{@item.name} to the cart"
+    redirect_to :back
+  end
+
+  def remove_from_cart
+    @item = Item.find(params[:id])
+    remove_item_from_cart(@item.id)
+    flash[:notice] = "Removed #{@item.name} from the cart"
+    redirect_to :back
   end
 
   private
@@ -48,7 +72,7 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:active, :id, :name, :description, :picture, :category, :weight, :photo, :units_per_item, item_prices_attributes: [:id, :price, :start_date, :end_date])
+    params.require(:item).permit(:active, :id, :name, :description, :category, :weight, :picture, :units_per_item, item_prices_attributes: [:id, :item_id, :price, :start_date, :end_date])
   end
 
 end

@@ -15,8 +15,8 @@
       <tr>
         <td align="center"><%= oi.quantity %></td>
         <td><%= link_to oi.item.name, item_path(oi.item) %></td>
-        <td align="center"><%= number_to_currency oi.item.price_on_date(date) %></td>
-        <td align="right"><%= number_to_currency oi.subtotal(date) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td align="center"><%= number_to_currency oi.item.price_on_date(Date.today) %></td>
+        <td align="right"><%= number_to_currency oi.subtotal(Date.today) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
         <% if controller.controller_name == 'home' %>
           <td>
             <% if oi.shipped_on.nil? %>

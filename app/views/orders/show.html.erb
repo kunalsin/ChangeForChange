@@ -3,14 +3,13 @@
     <%= render :partial => "order_details" %>
   </div>
   <div class="small-5 columns">
-    <%= render partial: "partials/previous_orders", locals: {previous_orders: @previous_orders}  unless @previous_orders.empty?%>
+    <%= render partial: "previous_orders", locals: {previous_orders: @previous_orders}  unless @previous_orders.empty?%>
   </div>
 </div>
-
 <% if logged_in? && current_user.role?(:customer) %>
   <div class="form-actions">
     <%= link_to orders_path, class: 'button radius' do %>
-      &nbsp;Return to My Orders
+      &nbsp;Return To My Orders
     <% end %>
   </div>
 <% else %>

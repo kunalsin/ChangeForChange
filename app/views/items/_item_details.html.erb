@@ -1,20 +1,86 @@
-<h3>
-  <b>Name</b>: <%= @item.name %>
-</h3><br>
+<div class="row">
+  <h3>
+      <b>Name</b>: <%= @item.name %>
+    </h3>
+    <br>
+    <p>
+      <b>Description</b>: <%= @item.description %>
+    </p>
+  <div class="col s6">
+    <% if @item.picture.blank? %>
+      <img class="activator" src="http://www.baseballclearinghouse.net/assets/images/image-unavailable.gif">
+    <% else %>
+      <%= image_tag @item.picture %>
+    <% end %>
+  </div>
+    <div class="col s6 m6">
+      <div class="card brown lighten-2">
+        <div class="card-content white-text">
+          <span class="card-title">Details</span>
+          <p><b>Comes In:</b> <%= @item.units_per_item %> <%= @item.category == 'bread' ? 'loaf' : @item.category %></p>
+          <p><b>Price:</b> <%= number_to_currency @item.current_price %></p>
+          <p><b>Total weight:</b> <%= @item.weight.round(2) %> lbs.</p>
+        </div>
+      </div>
 
-<p>
-  <b>Description</b>: <%= @item.description %>
-</p>
+      <% if current_user && current_user.role?(:customer) %>
+        <p><b><%= button_to "Add Item to Cart", add_to_cart_path(@item) %></b></p>
+      <% end %>
+      <% if current_user && current_user.role?(:admin) %>
+        <div class="col s12">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="30"><b>Order Comes In:</b></th>
+                <th width="30"><b>Active:</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b> <%=@item.units_per_item %> <%=@item.category == 'bread' ? 'loaf' : @item.category %></b></td>
+                <td><b> <%= @item.active ? "Yes" : "No" %>&nbsp;&nbsp;&nbsp;</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+</div>
+<br>
+<% if current_user && current_user.role?(:customer) %>
+  <% unless @similar_items.nil? %>
+    <h2>Similar Items You May Like</h2>
+    <div class="row">
+      <% @similar_items.each do |item| %>
+        <div class="col s4">
+          <div class="card small">
+            <div class="card-image waves-effect waves-block waves-light">
+              <% if item.picture.blank? %>
+                <img class="activator" src="http://www.baseballclearinghouse.net/assets/images/image-unavailable.gif">
+              <% else %>
+                <img class="activator" src=<%= item.picture%>>
+              <% end %>
+            </div>
+            <div class="card-content white-text">
+              <span class="card-title activator grey-text text-darken-4"><%= item.name %><i class="mdi-navigation-more-vert right"></i></span>
+              <p><%= link_to "More Details", item_path(item)%></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4"><b><%= item.name %></b> <i class="mdi-navigation-close right"></i></span><br>
+              <p><%= item.description %></p>
+              <p>Item Price: <%= number_to_currency(item.current_price) %></p>
+              <p>Comes In: <%= item.units_per_item %> <%= item.category == 'bread' ? 'loaf' : item.category %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+<% end %>
 
-<p>
-  <b>Order Comes In:</b> <%=@item.units_per_item %> <%=@item.category == 'bread' ? 'loaf' : @item.category %></p>
-</p>
 
 <% if current_user && current_user.role?(:admin) %>
-  <p>
-    <b>Active</b>: <%= @item.active ? "Yes" : "No" %>&nbsp;&nbsp;&nbsp;
-  </p>
-
+  <h3><b>Price History</b></h3>
   <table class="table table-striped">
     <thead>
       <tr>
@@ -24,13 +90,13 @@
       </tr>
     </thead>
     <tbody>
-      <% price_history.each do |ph| %>
+      <% @history.each do |ph| %>
         <tr>
-          <td><%= price.start_date.strftime('%B, %d, %Y') %></td>
-          <td><%= price.end_date.nil? ? 'Present' : price.end_date.strftime('%B, %d, %Y') %></td>
-          <td><%= number_to_currency price.price %></td>
+          <td><%= ph.start_date.strftime('%B, %d, %Y') %></td>
+          <td><%= ph.end_date.nil? ? 'Present' : ph.end_date.strftime('%B, %d, %Y') %></td>
+          <td><%= number_to_currency ph.price %></td>
         </tr>
       <% end %>
-    </tbody>
-  </table>
+  </tbody>
+</table>
 <% end %>

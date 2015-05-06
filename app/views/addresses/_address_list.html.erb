@@ -2,14 +2,14 @@
   <p><em>There are no <%= state %> addresses at this time.</em></p>
 <% else %>
 <h2><%= state.capitalize %> Addresses</h2>
-<table class="table table-striped">
+<table class="hoverable">
   <thead class="datagrid">
     <tr>
       <% unless current_user.role?(:customer) %>
-        <th>Customer</th>
+        <th>Customer &nbsp;&nbsp;<i class="small mdi-action-account-circle"></i></th>
       <% end %>
-      <th>Recipient</th>
-      <th>Address</th>
+      <th>Recipient &nbsp;&nbsp;<i class="small mdi-action-account-child"></i></th> 
+      <th>Address &nbsp;&nbsp;<i class="small mdi-action-home"></i></th>
       <th>Billing?</th>
       <th>&nbsp;</th>
     </tr>

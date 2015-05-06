@@ -6,7 +6,6 @@
           <% if @item.errors.any? %>
             <div id="error_explanation">
               <h5><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h5>
-
               <ul>
               <% @item.errors.full_messages.each do |msg| %>
                 <li><b style="color:red"><%= msg %></b></li>
@@ -44,18 +43,20 @@
             <%= item_form.label :active %><br />
           </div>
 
-          <%= item_form.simple_fields_for :item_price do |price_form| %>
+          <%= item_form.simple_fields_for :item_prices do |price_form| %>
             <div class="field">
               <%= price_form.label :price %>
               <%= price_form.text_field :price %><br />
             </div>
+            <%= price_form.input :start_date, as: :hidden, input_html: {value: Date.today } %>
+            <%= price_form.input :end_date, as: :hidden, input_html: {value: nil } %>
+          <%end%>
           </br>
           <div class="form-actions">
             <%= item_form.submit nil, :class => 'button radius' %>
-            <%= link_to 'Cancel', home_path, :class => 'button alert radius' %>
+            <%= link_to 'Cancel', items_path, :class => 'button alert radius' %>
           </div>
       </fieldset>
     <% end %>
   </div>
 </div>
-  <% end %>

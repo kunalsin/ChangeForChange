@@ -1,0 +1,38 @@
+<%= simple_form_for @order, html: { class: 'form-horizontal' } do |f| %>
+    <fieldset>
+        <legend><%= controller.action_name.capitalize %> Order</legend>
+          <% if @order.errors.any? %>
+            <div id="error_explanation">
+              <h5><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h5>
+              
+              <ul>
+              <% @order.errors.full_messages.each do |msg| %>
+                <li><b style="color:red"><%= msg %></b></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <b><%= f.label :address %></b><br />
+            <%= f.select :address_id, get_address_options(current_user), prompt: "Select..."  %>
+          </div>
+          <div class="field">
+            <b><%= f.label :credit_card_number %></b><br />
+            <%= f.text_field :credit_card_number %>
+          </div>
+          <div class="field">
+            <b><%= f.label :expiration_month %></b><br />
+            <%= f.text_field :expiration_month %>
+          </div>
+          <div class="field">
+            <b><%= f.label :expiration_year %></b><br />
+            <%= f.text_field :expiration_year %>
+          </div>
+        <br>
+         <div class="form-actions">
+            <%= f.submit nil, :class => 'button radius' %>
+            <%= link_to 'Cancel', home_path, :class => 'button alert radius' %>
+        </div>
+    </fieldset>
+<% end %>

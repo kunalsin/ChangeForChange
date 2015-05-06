@@ -1,5 +1,6 @@
 <div class="contain-to-grid">
     <section class="top-bar-section">
+      <%= link_to image_tag('breadexpress_title.png'), home_path %>
       <ul class="right">
         <!-- link to home -->
         <li><%= link_to "Home", home_path %></li>
@@ -16,21 +17,20 @@
           <li><a class="dropdown-button" data-activates="orders">Orders<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <ul id="orders" class="dropdown-content">
               <li><%= link_to "All Orders", orders_path %></li>
-              <li><%= link_to "New Order", new_order_path %></li>
             </ul>
 
           <!-- options for users -->
           <li><a class="dropdown-button" data-activates="users">Users<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <ul id="users" class="dropdown-content">
-              <li><%= link_to "Customers", customers_path %></li>
-              <li><%= link_to "Create Users", new_user_path %></li>
+              <li><%= link_to "All Users", customers_path %></li>
+              <li><%= link_to "Create Users", new_customer_path %></li>
             </ul>
 
            <!-- options for address -->
            <li><a class="dropdown-button" data-activates="addresses">Addresses<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
             <ul id="addresses" class="dropdown-content">
               <li><%= link_to "All Addresses", addresses_path %></li>
-              <li><%= link_to "Create Address", new_address_path %></li>
+              <li><%= link_to "Create A New Address", new_address_path %></li>
             </ul>
 
           <!-- options for items -->
@@ -39,13 +39,12 @@
               <li><%= link_to "All Items", items_path %></li>
               <li><%= link_to "Add an Item", new_item_path %></li>
             </ul>
-          </li>
         <% end %>
 
       <% if logged_in? && (current_user.role?(:customer)) %>
 
         <!-- options for items -->
-        <li><%= link_to "View Menu", items_path %></li>
+        <li><%= link_to "View Our items", items_path %></li>
 
         <!-- options for orders -->
         <li><a class="dropdown-button" data-activates="orders">Orders<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
@@ -57,15 +56,31 @@
         <!-- options for addresses -->
         <li><a class="dropdown-button" data-activates="addresses">Addresses<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
         <ul id="addresses" class="dropdown-content">
-          <li><%= link_to "My Addresses", addresses_path %></li>
+          <li><%= link_to "My Address", addresses_path %></li>
           <li><%= link_to "Add an Address", new_address_path %></li>
         </ul>
+
+        <li><%= link_to "My Cart", cart_path %></li>
       <% end %>
 
+    <% if logged_in? && (current_user.role?(:baker)) %>
+      <li><a class="dropdown-button" data-activates="current">Tasks<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+      <ul id="current" class="dropdown-content">
+        <li><%= link_to "Todays Baking List", home_path %></li>
+      </ul>
+    <% end %>
+
+    <% if logged_in? && (current_user.role?(:shipper)) %>
+      <li><a class="dropdown-button" data-activates="current">Tasks<i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+      <ul id="current" class="dropdown-content">
+        <li><%= link_to "Todays Shipping List", home_path %></li>
+      </ul>
+    <% end %>
+
      <% if logged_in? %>
-        <li><a class="dropdown-button" data-activates="current"><%=current_user.username %><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-        <ul id="current" class="dropdown-content">
-          <li><%= link_to "Settings", customers_path %></li>
+        <li><a class="dropdown-button" data-activates="logout"><%=current_user.username.upcase %><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+        <ul id="logout" class="dropdown-content">
+          <li><%= link_to "My Profile", customer_path(current_user.customer.id) %></li>
           <li><%= link_to 'Logout', logout_path %></li>
         </ul>
       <% end %>

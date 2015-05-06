@@ -6,24 +6,20 @@
 
     <title>A &amp; M Bread Express</title>
     <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <div id="title_area">
-      <%= link_to image_tag('breadexpress_title.png'), home_path %>
-    </div>
     <%= render :partial => "partials/nav" %>
     
     <div class="row">
-      <div class="small-12 columns" id="main_content">
+      <div id="main_content">
         <%= render :partial => "partials/flash" %>
         <%= yield %>
       </div>
     </div>
     <footer>
-      <div class="small-12 columns" id="footer">
+      <div id="footer">
         <%= render partial: 'partials/footer' %>
       </div>
     </footer> 

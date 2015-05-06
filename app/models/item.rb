@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
 
-  mount_uploader :photo, PhotoUploader
+  mount_uploader :picture, PhotoUploader
   # List of allowable categories
   CATEGORIES = [['Bread','bread'],['Muffins','muffins'],['Pastries','pastries']]
   
@@ -8,6 +8,9 @@ class Item < ActiveRecord::Base
   has_many :order_items
   has_many :item_prices
   has_many :orders, through: :order_items
+
+  # Allow item_price to be nested within item
+  accepts_nested_attributes_for :item_prices, reject_if: ->(item_price) { item_price[:price].blank? }, allow_destroy: false
 
   # Scopes
   scope :alphabetical, -> { order(:name) }

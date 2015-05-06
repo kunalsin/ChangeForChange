@@ -14,9 +14,14 @@
     <%= f.input :city, input_html: {class: "avg"} %>
     <%= f.input :state, collection: Address::STATES_LIST, include_blank: true, input_html: {class: "avg"} %>
     <%= f.input :zip, input_html: {class: "avg"} %>
-    <%= f.input :is_billing, label: 'Billing? ' %>
-    <%= f.input :active %>
-
+    <div class="field">
+      <%= f.check_box :active %>
+      <%= f.label :active %><br />
+    </div>
+    <div class="field">
+      <%= f.check_box :is_billing %>
+      <%= f.label :is_billing %><br />
+    </div>
 
     <div class="form-actions">
       <%= f.submit nil, :class => 'button radius' %>

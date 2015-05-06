@@ -1,0 +1,33 @@
+<% if @order_items.empty? %>
+  <h2><center>Your Cart Is Empty. Please browse our selection of items and add the ones that you like! </center></h5>
+  <%= link_to "Browse Items", items_path%>
+<% else %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="100">Quantity</th>
+        <th width="300">Item</th>
+        <th width="100">Unit Price</th>
+        <th width="100">Subtotal</th>
+        <th width="100">Remove Item?</th>
+
+        <% if controller.controller_name == 'home' %>
+          <th>&nbsp;</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @order_items.each do |oi| %>
+        <tr>
+          <td align="center"><%= oi.quantity %></td>
+          <td><%= link_to oi.item.name, item_path(oi.item) %></td>
+          <td align="center"><%= number_to_currency oi.item.price_on_date(Date.today) %></td>
+          <td align="right"><%= number_to_currency oi.subtotal(Date.today) %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+          <td align="right"><%= button_to("Delete",remove_from_cart_path(oi.item))%>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= button_to "Checkout", checkout_path%>
+<%end%>
+

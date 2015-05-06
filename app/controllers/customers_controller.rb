@@ -1,6 +1,8 @@
 class CustomersController < ApplicationController
   include ActionView::Helpers::NumberHelper
-  before_action :check_login, except: [:new]
+  include BreadExpressHelpers::Cart
+
+  before_action :check_login, except: [:new, :create]
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
   authorize_resource
   
@@ -16,19 +18,22 @@ class CustomersController < ApplicationController
   def new
     @customer = Customer.new
     user = @customer.build_user
-
   end
 
   def edit
     # reformat phone w/ dashes when displayed for editing (preference; not required)
     @customer.phone = number_to_phone(@customer.phone)
     # should have a user associated with customer, but just in case...
-
+    user = @customer.build_user
   end
 
   def create
     @customer = Customer.new(customer_params)
     if @customer.save
+      if !current_user
+        session[:user_id] = @customer.user.id
+      end
+      create_cart
       redirect_to @customer, notice: "#{@customer.proper_name} was added to the system."
     else
       render action: 'new'
@@ -43,6 +48,11 @@ class CustomersController < ApplicationController
     else
       render action: 'edit'
     end
+  end
+
+  def destroy
+    @customer.destroy
+    redirect_to customers_url, notice: "The customer was removed from the system."
   end
 
   private
