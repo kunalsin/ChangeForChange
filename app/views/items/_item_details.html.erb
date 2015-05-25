@@ -1,108 +1,33 @@
-<div class="row">
+<div class="row container">
   <h3>
-      <b>Name</b>: <%= @item.name %>
+      <b>Transaction Completed by User Id</b>: <%= @item.name %>
     </h3>
     <br>
-    <p>
-      <b>Description</b>: <%= @item.description %>
-    </p>
-  <div class="col s6">
-    <% if @item.picture.blank? %>
-      <img class="activator" src="http://www.baseballclearinghouse.net/assets/images/image-unavailable.gif">
-    <% else %>
-      <%= image_tag @item.picture %>
-    <% end %>
   </div>
-    <div class="col s6 m6">
-      <div class="card brown lighten-2">
-        <div class="card-content white-text">
-          <span class="card-title">Item Details</span>
-          <p><b>Comes In:</b> <%= @item.units_per_item %> <%= @item.category == 'bread' ? 'loaf' : @item.category %></p>
-          <p><b>Price:</b> <%= number_to_currency @item.current_price %></p>
-          <p><b>Total weight:</b> <%= @item.weight.round(2) %> lbs.</p>
-        </div>
-      </div>
+      <br>
+      <div class = "col s12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th><center><b>Date</b></center></th>
+            <th><center><b>Charity</b></center></th>
+            <th><center><b>Amount Donated</b></center></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @history.each_with_index do |ph, index| %>
+            <tr>
+              <td><center><%= ph.start_date.strftime('%B, %d, %Y') %></center></td>
+              <td><center><%= @custitems[rand(1..22)]["nickname"] %></center></td>
+              <td><center><%= number_to_currency ph.price %></center></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+     </div>
 
-      <% if current_user && current_user.role?(:customer) %>
-        <p><b><%= button_to "Add Item to Cart", add_to_cart_path(@item) %></b></p>
+ <% if current_user && current_user.role?(:customer) %>
+        <p><b><%= button_to "Save Transaction", add_to_cart_path(@item) %></b></p>
       <% end %>
-      <% if current_user && current_user.role?(:admin) %>
-        <div class="col s12">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th width="30"><b>Order Comes In:</b></th>
-                <th width="30"><b>Active:</b></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><b> <%=@item.units_per_item %> <%=@item.category == 'bread' ? 'loaf' : @item.category %></b></td>
-                <td><b> <%= @item.active ? "Yes" : "No" %>&nbsp;&nbsp;&nbsp;</b></td>
-              </tr>
-            </tbody>
-          </table>
-          <%= render :partial => 'item_price' %>
-        </div>
-      <% end %>
-    </div>
-</div>
-<br>
-<% if current_user && current_user.role?(:customer) %>
-  <% unless @similar_items.nil? %>
-    <h2>Similar Items You May Like</h2>
-    <div class="row">
-      <% @similar_items.each do |item| %>
-        <div class="col s4">
-          <div class="card small">
-            <div class="card-image waves-effect waves-block waves-light">
-              <% if item.picture.blank? %>
-                <img class="activator" src="http://www.baseballclearinghouse.net/assets/images/image-unavailable.gif">
-              <% else %>
-                <img class="activator" src=<%= item.picture%>>
-              <% end %>
-            </div>
-            <div class="card-content white-text">
-              <span class="card-title activator grey-text text-darken-4"><%= item.name %><i class="mdi-navigation-more-vert right"></i></span>
-              <p><%= link_to "More Details", item_path(item)%></p>
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4"><b><%= item.name %></b> <i class="mdi-navigation-close right"></i></span><br>
-              <p><%= item.description %></p>
-              <p>Item Price: <%= number_to_currency(item.current_price) %></p>
-              <p>Comes In: <%= item.units_per_item %> <%= item.category == 'bread' ? 'loaf' : item.category %></p>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-    </div>
-<% end %>
 
-
-<% if current_user && current_user.role?(:admin) %>
-  <h3><b>Price History</b></h3>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th width="300">Start Date</th>
-        <th width="100">End Date</th>
-        <th width="100">Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @history.each do |ph| %>
-        <tr>
-          <td><%= ph.start_date.strftime('%B, %d, %Y') %></td>
-          <td><%= ph.end_date.nil? ? 'Present' : ph.end_date.strftime('%B, %d, %Y') %></td>
-          <td><%= number_to_currency ph.price %></td>
-        </tr>
-      <% end %>
-  </tbody>
-</table>
-<% end %>
-
-<% if !logged_in? %>
-  <p><%= link_to "View More Items", items_path%></p>
-<%end%>
 

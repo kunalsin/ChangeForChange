@@ -2,7 +2,7 @@
   <div class="row">
     <div class="span7">
       <fieldset>
-        <legend><%= controller.action_name.capitalize %> Item </legend>
+        <legend><%= controller.action_name.capitalize %> Transaction </legend>
           <% if @item.errors.any? %>
             <div id="error_explanation">
               <h5><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h5>
@@ -15,32 +15,12 @@
           <% end %>
 
           <div class="field">
-            <b><%= item_form.label :name %></b><br />
+            <b><%= item_form.label :User_Id %></b><br />
             <%= item_form.text_field :name %>
-          </div>
-          <div class="field">
-            <b><%= item_form.label :description %></b><br />
-            <%= item_form.text_field :description %>
-          </div>
-           <div class="field">
-            <%= item_form.label :picture %><br />
-            <%= item_form.file_field :picture %>
-          </div>
-          <div class="field">
-            <b><%= item_form.label :category %></b><br />
-            <%= item_form.select(:category, Item::CATEGORIES, prompt: "Select...") %>
-          </div>
-          <div class="field">
-            <%= item_form.label :units_per_item %>
-            <%= item_form.text_field :units_per_item %><br />
-          </div>
-           <div class="field">
-            <%= item_form.label :weight %>
-            <%= item_form.text_field :weight %><br />
           </div>
 
           <%= item_form.simple_fields_for :item_prices do |price_form| %>
-            <% if controller.action_name == 'new' || controller.action_name == 'create' %>
+            <% if controller.action_name == 'new' || controller.action_name == 'create'  %>
             <div class="field">
               <%= price_form.label :price %>
               <%= price_form.text_field :price %><br />
@@ -56,7 +36,7 @@
           </div>
           <div class="form-actions">
             <%= item_form.submit nil, :class => 'button radius' %>
-            <%= link_to 'Cancel', items_path, :class => 'button alert radius' %>
+            <%= link_to 'Cancel', home_path, :class => 'button alert radius' %>
           </div>
       </fieldset>
     <% end %>

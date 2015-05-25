@@ -16,6 +16,7 @@ class ItemsController < ApplicationController
     @history = @item.item_prices.chronological
     @item_price = ItemPrice.new
     @similar_items = Item.active.for_category(@item.category)[1..3]
+    @custitems = Account.getAll()
   end
 
   def edit
@@ -31,7 +32,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to @item, notice: "#{@item.name} was added to the system."
+      redirect_to @item, notice: "User #{@item.name} made a deposit to a charity"
     else
       render action: 'new'
     end
@@ -57,7 +58,7 @@ class ItemsController < ApplicationController
   def add_to_cart
     @item = Item.find(params[:id])
     add_item_to_cart(@item.id)
-    flash[:notice] = "Added #{@item.name} to the cart"
+    flash[:notice] = "Saved this transaction to the system"
     redirect_to :back
   end
 
@@ -66,6 +67,9 @@ class ItemsController < ApplicationController
     remove_item_from_cart(@item.id)
     flash[:notice] = "Removed #{@item.name} from the cart"
     redirect_to :back
+  end
+
+  def get_ids
   end
 
   private

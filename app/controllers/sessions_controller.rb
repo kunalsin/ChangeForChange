@@ -20,7 +20,6 @@ class SessionsController < ApplicationController
   end
   
   def destroy
-    destroy_cart
     session[:user_id] = nil
     redirect_to root_url, notice: "Logged out!"
   end

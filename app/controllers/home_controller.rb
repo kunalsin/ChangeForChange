@@ -37,7 +37,7 @@ class HomeController < ApplicationController
   end
 
   def total_customers
-    @total_cust = Customer.all.count
+    @total_cust = Customer.getAll().count
   end
 
   def total_users

@@ -1,11 +1,14 @@
+require 'capital_one'
+
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  Config.apiKey = "71b84ccfb38cca73865a4c218e2350e6"
 
   # just show a flash message instead of full CanCan exception
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:error] = "You are not authorized to take this action.  Go away or I shall taunt you a second time."
+    flash[:error] = "You are not authorized to take this action"
     redirect_to home_path
   end
   

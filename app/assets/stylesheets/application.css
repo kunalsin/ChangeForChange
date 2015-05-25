@@ -31,7 +31,6 @@ body {
 	border: 4px solid brown;
 	margin-bottom: 60px;
 	padding: 10px;
-	background-color: #C5A88B
 }
 
 .contact {
@@ -43,4 +42,13 @@ body {
 }
 .site-footer {
   background: orange;
+}
+
+.mode {
+	margin: auto;
+	width: 75%;
+}
+
+.nav {
+	color: #8d6e63;
 }

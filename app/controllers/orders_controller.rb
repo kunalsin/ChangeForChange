@@ -30,8 +30,8 @@ class OrdersController < ApplicationController
     @order = Order.new
     @cart = get_list_of_items_in_cart
     @total = calculate_cart_items_cost
-    @shipping = calculate_cart_shipping
-    @grand_total = @total + @shipping
+    #@shipping = calculate_cart_shipping
+    @grand_total = @total
   end 
 
   def create

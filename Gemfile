@@ -32,6 +32,7 @@ gem 'foundation-rails'
 source 'https://rails-assets.org' do
   gem 'rails-assets-materialize'
 end
+gem 'capital_one'
 
 # Additional gems that are very useful in Rails development
 group :development do

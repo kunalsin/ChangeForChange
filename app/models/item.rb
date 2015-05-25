@@ -2,7 +2,7 @@ class Item < ActiveRecord::Base
 
   mount_uploader :picture, PhotoUploader
   # List of allowable categories
-  CATEGORIES = [['Bread','bread'],['Muffins','muffins'],['Pastries','pastries']]
+  CATEGORIES = [['Charity 1','bread'],['Charity 2','muffins'],['Charity 3','pastries']]
   
   # Relationships
   has_many :order_items
@@ -17,12 +17,13 @@ class Item < ActiveRecord::Base
   scope :active,       -> { where(active: true) }
   scope :inactive,     -> { where(active: false) }
   scope :for_category, ->(category) { where(category: category) }
+  scope :for_item,      ->(item_id) { where(item_id: item_id) }
   
   # Validations
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
-  validates_numericality_of :units_per_item, only_integer: true, greater_than: 0
-  validates_numericality_of :weight, greater_than: 0
-  validates_inclusion_of :category, in: CATEGORIES.map{|key, value| value}, message: "is not an option"
+  #validates :name, presence: true, uniqueness: { case_sensitive: false }
+  #validates_numericality_of :units_per_item, only_integer: true, greater_than: 0
+  #validates_numericality_of :weight, greater_than: 0
+  #validates_inclusion_of :category, in: CATEGORIES.map{|key, value| value}, message: "is not an option"
   # validates_inclusion_of :category, in: CATEGORIES.to_h.values, message: "is not an option"
 
   # Callbacks

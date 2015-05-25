@@ -1,24 +1,17 @@
-<h2><center>Admin's Dashboard</center></h2>
+<h2><center>Company Dashboard</center></h2>
 
-<div class = "col s12">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th><center><b>Total Number Of Customers In the System</b></center></th>
-        <th><center><b>Total Number Of Users In the System</b></center></th>
-        <th><center><b>Total Number Of Items In the System</b></center></th>
-
-      </tr>
-    </thead>
-    <tbody>
-        <tr>
-          <td><center><%= @total_c %></center></td>
-          <td><center><%= @total_u %></center></td>
-          <td><center><%= @total_i %></center></td>
-
-        </tr>
-    </tbody>
-  </table>
- </div>
-
-
+ <ul class="collapsible popout" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>Todays Total Donation Amount</div>
+      <div class="collapsible-body"><p><b>$1.88</b></p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="mdi-maps-place"></i>Total Number Of Customers Who Donated</div>
+      <div class="collapsible-body"><p>3 Users</p></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="mdi-maps-place"></i>Customer who donated the most</div>
+      <div class="collapsible-body"><p>User: 5000600001</p></div>
+      <div class="collapsible-body"><p>Donated: $0.75</p></div>
+    </li>
+  </ul>
